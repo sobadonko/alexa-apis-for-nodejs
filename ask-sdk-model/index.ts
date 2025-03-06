@@ -513,6 +513,10 @@ export interface Context {
      * Provides the current experimentation state
      */
     'Experimentation'?: interfaces.alexa.experimentation.ExperimentationState;
+    /**
+     * Provides the customer's advertising ID and preference for receiving interest-based ads. Included in requests to skills that declare that the skill delivers advertising.
+     */
+    'Advertising'?: interfaces.alexa.advertising.Advertising;
 }
 
 /**
@@ -1167,6 +1171,25 @@ export namespace interfaces.alexa.advertisement {
      * @enum
      */
     export type ReasonCode = 'DEVICE_OCCUPIED' | 'UNSUPPORTED_DEVICE' | 'SKILL_DAILY_CAP_LIMIT_REACHED' | 'DOMAIN_DAILY_CAP_LIMIT_REACHED' | 'INTERNAL_SERVER_ERROR' | 'AD_NOT_AVAILABLE';
+}
+
+export namespace interfaces.alexa.advertising {
+    /**
+     * The Advertising object provides the customer's advertising ID and preference for receiving interest-based ads. Alexa includes the Advertising object in requests to custom skills that declare that the skill delivers advertising.
+     * @interface
+     */
+    export interface Advertising {
+        /**
+         * Customer-resettable, unique identifier that maps to the ifa attribute of the OpenRTB API specification.
+         * Formatted as a version 4 UUID string separated by dashes (8-4-4-4-12).
+         */
+        'advertisingId': string;
+        /**
+         * Indicates whether the customer wants to receive interest-based ads. Set to true when the customer opts out of interest-based ads and tracking.
+         * The limitAdTracking property maps to the lmt attribute of the OpenRTB API specification.
+         */
+        'limitAdTracking': boolean;
+    }
 }
 
 export namespace interfaces.alexa.comms.messagingcontroller {
